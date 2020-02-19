@@ -31,7 +31,7 @@ public class labb2databas {
 
 
     private static void deleteBook(){
-        System.out.println("Skriv in id:t på boken som ska tas bort: ");
+        System.out.println("Skriv in id:t på filmen som ska tas bort: ");
         int inputId = scanner.nextInt();
         delete(inputId);
         scanner.nextLine();
@@ -55,17 +55,16 @@ public class labb2databas {
         }
     }
 
-    private static void insert(String titel, String forfattare, int pris) {
-        String sql = "INSERT INTO bok(bokTitel, bokForfattare, bokPris) VALUES(?,?,?)";
+    private static void insert(String titel, int id) {
+        String sql = "INSERT INTO film(filmTitel, filmKaraktarId) VALUES(?,?)";
 
         try{
             Connection conn = connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, titel);
-            pstmt.setString(2, forfattare);
-            pstmt.setInt(3, pris);
+            pstmt.setInt(2, id);
             pstmt.executeUpdate();
-            System.out.println("Du har lagt till en ny bok");
+            System.out.println("Du har lagt till en ny film");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -129,7 +128,7 @@ public class labb2databas {
                     break;
 
                 case 2:
-                    insert("Sagan om ringen", "Tolkien, J.R.R", 120);
+                    insert("Indiana Jones",3);
                     break;
 
                 case 3:
