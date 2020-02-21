@@ -55,19 +55,28 @@ public class labb2databas {
     }
 
     private static void insert(String titel, int id) {
+        System.out.println("Skriv in titel på filmen: ");
+        String titell = scanner.nextLine();
+        System.out.println("Skriv ange ett nummer: ");
+        int idd = scanner.nextInt();
         String sql = "INSERT INTO film(filmTitel, filmKaraktarId) VALUES(?,?)";
 
         try{
             Connection conn = connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, titel);
-            pstmt.setInt(2, id);
+            pstmt.setString(1, titell);
+            pstmt.setInt(2, idd);
             pstmt.executeUpdate();
             System.out.println("Du har lagt till en ny film");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+/*private static void deleteFilm(){
+        System.out.println("Skriv in id:t på filmen som ska tas bort: ");
+        int inputId = scanner.nextInt();
+        delete(inputId);
+        scanner.nextLine();*/
 
     private static void update(String titel, int nr) {
         String sql = "UPDATE film SET filmTitel = ?  WHERE filmId = ?";
@@ -80,7 +89,7 @@ public class labb2databas {
             pstmt.setInt(2, nr);
             // update
             pstmt.executeUpdate();
-            System.out.println("Du har uppdaterat vald bok");
+            System.out.println("Du har uppdaterat vald film");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
