@@ -54,33 +54,30 @@ public class labb2databas {
         }
     }
 
-    private static void insert(String titel,String knamn) {
+    private static void insert(String filmTitel, String karaktarNamn) {
         System.out.println("Skriv in titel på filmen: ");
         String titell = scanner.nextLine();
         System.out.println("Skriv in huvudrolls karaktär: ");
         String karaknamn = scanner.nextLine();
+        String sql = "INSERT INTO film(filmTitel,filmkaraktarId) VALUES (?,?" +
+                ");" + "INSERT INTO karaktar(karaktarNamn) VALUES (?);";
 
 
 
-        String sql = "INSERT INTO film(filmTitel) VALUES(?)" +
-                "INSERT INTO karaktar(karaktarNamn) VALUES(?)";
+
+
 
         try{
             Connection conn = connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, titell);
-            pstmt.setString(2, karaknamn);
-            pstmt.executeUpdate();
+            PreparedStatement pstmt1 = conn.prepareStatement(sql);
+            pstmt1.setString(1, filmTitel);
+            pstmt1.setString(2, karaktarNamn);
+            pstmt1.executeUpdate();
             System.out.println("Du har lagt till en ny film");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-/*private static void deleteFilm(){
-        System.out.println("Skriv in id:t på filmen som ska tas bort: ");
-        int inputId = scanner.nextInt();
-        delete(inputId);
-        scanner.nextLine();*/
 
     private static void update(String titel, int nr) {
         String sql = "UPDATE film SET filmTitel = ?  WHERE filmId = ?";
