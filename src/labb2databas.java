@@ -1,4 +1,4 @@
-// Funkar inte
+//Test
 
 import java.sql.*;
 import java.util.Scanner;
