@@ -54,18 +54,22 @@ public class labb2databas {
         }
     }
 
-    private static void insert(String titel, int id) {
+    private static void insert(String titel,String knamn) {
         System.out.println("Skriv in titel på filmen: ");
         String titell = scanner.nextLine();
-        System.out.println("Skriv ange ett nummer: ");
-        int idd = scanner.nextInt();
-        String sql = "INSERT INTO film(filmTitel, filmKaraktarId) VALUES(?,?)";
+        System.out.println("Skriv in huvudrolls karaktär: ");
+        String karaknamn = scanner.nextLine();
+
+
+
+        String sql = "INSERT INTO film(filmTitel) VALUES(?)" +
+                "INSERT INTO karaktar(karaktarNamn) VALUES(?)";
 
         try{
             Connection conn = connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, titell);
-            pstmt.setInt(2, idd);
+            pstmt.setString(2, karaknamn);
             pstmt.executeUpdate();
             System.out.println("Du har lagt till en ny film");
         } catch (SQLException e) {
@@ -131,7 +135,8 @@ public class labb2databas {
                     break;
 
                 case 2:
-                    insert("Indiana Jones",3);
+                   
+                    insert("", "" );
                     break;
 
                 case 3:
