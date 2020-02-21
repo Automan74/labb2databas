@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-//test
-=======
-
->>>>>>> parent of b184a8b... test komentar nr5
 
 import java.sql.*;
 import java.util.Scanner;
