@@ -29,7 +29,7 @@ public class labb2databas {
     }
 
 
-    private static void deleteBook(){
+    private static void deleteFilm(){
         System.out.println("Skriv in id:t på filmen som ska tas bort: ");
         int inputId = scanner.nextInt();
         delete(inputId);
@@ -87,7 +87,7 @@ public class labb2databas {
     }
 
     private static void delete(int id) {
-        String sql = "DELETE FROM bok WHERE bokId = ?";
+        String sql = "DELETE FROM film WHERE filmId = ?";
 
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -96,7 +96,7 @@ public class labb2databas {
             pstmt.setInt(1, id);
             // execute the delete statement
             pstmt.executeUpdate();
-            System.out.println("Du har tagit bort boken");
+            System.out.println("Du har tagit bort filmen");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -131,7 +131,7 @@ public class labb2databas {
 
                 case 4:
                     //delete(1);
-                    deleteBook();
+                    deleteFilm();
                     break;
 
                 case 5:
