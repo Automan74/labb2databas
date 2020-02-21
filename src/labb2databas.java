@@ -30,24 +30,24 @@ public class labb2databas {
     }
 
 
-    private static void deleteBook() {
+    private static void deleteBook(){
         System.out.println("Skriv in id:t på filmen som ska tas bort: ");
         int inputId = scanner.nextInt();
         delete(inputId);
         scanner.nextLine();
     }
 
-    private static void selectAll() {
+    private static void selectAll(){
         String sql = "SELECT * FROM film";
 
         try {
             Connection conn = connect();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql);
 
             // loop through the result set
             while (rs.next()) {
-                System.out.println(rs.getInt("filmid") + "\t" +
+                System.out.println(rs.getInt("filmid") +  "\t" +
                         rs.getString("filmTitel"));
             }
         } catch (SQLException e) {
@@ -58,7 +58,7 @@ public class labb2databas {
     private static void insert(String titel, int id) {
         String sql = "INSERT INTO film(filmTitel, filmKaraktarId) VALUES(?,?)";
 
-        try {
+        try{
             Connection conn = connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, titel);
@@ -93,7 +93,7 @@ public class labb2databas {
     }
 
     private static void delete(int id) {
-        String sql = "DELETE FROM film WHERE filmId = ?";
+        String sql = "DELETE FROM bok WHERE bokId = ?";
 
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -102,7 +102,7 @@ public class labb2databas {
             pstmt.setInt(1, id);
             // execute the delete statement
             pstmt.executeUpdate();
-            System.out.println("Du har tagit bort filmen");
+            System.out.println("Du har tagit bort boken");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -112,7 +112,7 @@ public class labb2databas {
 
         boolean quit = false;
         printActions();
-        while (!quit) {
+        while(!quit) {
             System.out.println("\nVälj (5 för att visa val):");
             int action = scanner.nextInt();
             scanner.nextLine();
@@ -128,7 +128,7 @@ public class labb2databas {
                     break;
 
                 case 2:
-                    insert("Indiana Jones", 3);
+                    insert("Indiana Jones",3);
                     break;
 
                 case 3:
