@@ -69,20 +69,15 @@ public class labb2databas {
         }
     }
 
-    private static void update(String forfattare, String titel, int pris, int id) {
-        String sql = "UPDATE bok SET bokForfattare = ? , "
-                + "bokTitel = ? , "
-                + "bokPris = ? "
-                + "WHERE bokId = ?";
+    private static void update(String titel, int nr) {
+        String sql = "UPDATE film SET filmTitel = ?  WHERE filmId = ?";
 
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             // set the corresponding param
             pstmt.setString(1, titel);
-            pstmt.setString(2, forfattare);
-            pstmt.setInt(3, pris);
-            pstmt.setInt(4, id);
+            pstmt.setInt(2, nr);
             // update
             pstmt.executeUpdate();
             System.out.println("Du har uppdaterat vald bok");
@@ -131,7 +126,7 @@ public class labb2databas {
                     break;
 
                 case 3:
-                    update("Bilbo", "Tolkien, J.R.R", 100, 1);
+                    update("First contact", 1);
                     break;
 
                 case 4:
